@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    steps:
+      - run: ./gradlew build
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
