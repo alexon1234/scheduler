@@ -1,4 +1,4 @@
-package org.jetbrains.kotlin.demo.shared.infrastructure
+package org.demo.shared.infrastructure
 
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint

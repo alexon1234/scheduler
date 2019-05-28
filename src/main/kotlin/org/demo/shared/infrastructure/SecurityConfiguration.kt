@@ -1,4 +1,4 @@
-package org.jetbrains.kotlin.demo.shared.infrastructure
+package org.demo.shared.infrastructure
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.jetbrains.kotlin.demo.shared.infrastructure.RestAuthenticationEntryPoint as RestAuthenticationEntryPoint1
+import org.demo.shared.infrastructure.RestAuthenticationEntryPoint as RestAuthenticationEntryPoint1
 
 @Configuration
 @EnableWebSecurity
@@ -20,7 +20,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
         http
                 .csrf().disable()
                 .exceptionHandling()
-                .authenticationEntryPoint(org.jetbrains.kotlin.demo.shared.infrastructure.RestAuthenticationEntryPoint())
+                .authenticationEntryPoint(org.demo.shared.infrastructure.RestAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/greeting").authenticated()
