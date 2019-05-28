@@ -1,4 +1,4 @@
-package org.jetbrains.kotlin.demo
+package org.jetbrains.kotlin.demo.shared.infrastructure
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.jetbrains.kotlin.demo.shared.infrastructure.RestAuthenticationEntryPoint as RestAuthenticationEntryPoint1
 
 @Configuration
 @EnableWebSecurity
@@ -18,20 +19,25 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http
                 .csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(org.jetbrains.kotlin.demo.shared.infrastructure.RestAuthenticationEntryPoint())
+                .and()
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and().formLogin().permitAll()
-                .and().logout().permitAll()
+                .antMatchers("/api/greeting").authenticated()
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
+                .and()
+                .formLogin()
+                .and()
+                .logout()
     }
 
 
     @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder())
-                .withUser("admin")
-                .password("admin")
-                .roles("USER")
+                .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN")
+                .and()
+                .withUser("user").password(passwordEncoder().encode("userPass")).roles("USER")
     }
 
 
@@ -43,7 +49,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     companion object {
 
         // secret123
-        private val ENCODED_PASSWORD = "$2a$10\$AIUufK8g6EFhBcumRRV2L.AQNz3Bjp7oDQVFiO5JJMBFZQ6x2/R/2"
+        private const val ENCODED_PASSWORD = "$2a$10\$AIUufK8g6EFhBcumRRV2L.AQNz3Bjp7oDQVFiO5JJMBFZQ6x2/R/2"
     }
 
 }
