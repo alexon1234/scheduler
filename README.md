@@ -1,11 +1,3 @@
-## Spring Boot Example
+## TODO APP - To let about kotlin, Spring boot
 
-This is a basic example of how to use Kotlin in a Spring Boot application. See the [accompanying tutorial](http://kotlinlang.org/docs/tutorials/spring-boot-restful.html)
-for more information.
-
-To run:
-
-```
-$ ./gradlew bootRun
-```
-
+[![CircleCI](https://circleci.com/gh/alexon1234/scheduler.svg?style=svg)](https://circleci.com/gh/alexon1234/scheduler)
