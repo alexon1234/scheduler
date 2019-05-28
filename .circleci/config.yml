@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:11.0.0-jdk
+      - image: circleci/openjdk:11.0.1-jdk
     working_directory: ~/scheduler
     steps:
       - run: ./gradlew build
