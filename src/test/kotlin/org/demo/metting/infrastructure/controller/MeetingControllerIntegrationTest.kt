@@ -23,7 +23,7 @@ class MeetingControllerIntegrationTest {
         mvc
                 ?.perform(
                         get("/api/meeting").contentType(MediaType.APPLICATION_JSON).content("Hello World"))
-                ?.andExpect(status().is5xxServerError)
+                ?.andExpect(status().isOk)
 
     }
 }
